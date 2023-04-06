@@ -5,7 +5,6 @@
 using namespace std;
 
 class Cell;
-// Genome Class
 class Genome
 {
 protected:
@@ -23,5 +22,20 @@ public:
     void JaheshB(string s1, string s2);
     void JaheshR(string s1);
 };
+class Cell : public Genome 
+{
+protected:
+    int No_Chromo;
 
+public:
+friend class Animal;
+    vector<Genome> Chromo;
+    int Get_No_Chromo();
+    void SetChromo(int n);
+    void CellDeath(Cell &C);
+    void JaheshS(char c, char h, int n, int m);
+    void JaheshB(string s1, int n, string s2, int m);
+    void JaheshR(string s1, int n);
+    void palin(int n);
+};
 #endif

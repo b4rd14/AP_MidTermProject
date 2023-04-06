@@ -302,4 +302,135 @@ void Genome::JaheshR(string s1)
         DNA[1] = p11 + Ns11 + p13;
     }
 }
+void Cell::SetChromo(int n)
+{
+    No_Chromo = n;
+    string D1, D2;
+    for (int i = 0; i < No_Chromo; i++)
+    {
+        Genome chromo;
+        Chromo.push_back(chromo);
+    }
+    for (int i = 0; i < No_Chromo; i++)
+    {
+        cout << "First String  : ";
+        cin >> D1;
+        cout << "Second String : ";
+        cin >> D2;
+        Chromo[i].SetGen(D1, D2);
+        cout << endl;
+    }
+}
+int Cell::Get_No_Chromo(){
+    return No_Chromo;
+}
+void Cell::CellDeath(Cell &C)
+{
+    for (int i = 0; i < C.No_Chromo; i++)
+    {
+        int cnt1 = 0, cnt2 = 0, cnt3 = 0;
+        for (int j = 0; j < C.Chromo[i].DNA[0].length(); j++)
+        {
+            if (C.Chromo[i].DNA[0][j] == 'A' || C.Chromo[i].DNA[0][j] == 'T')
+            {
+                if (C.Chromo[i].DNA[0][j] != char(149 - C.Chromo[i].DNA[1][j]))
+                {
+                    cnt1++;
+                }
+                else
+                {
+                    cnt2++;
+                }
+            }
+            else if (C.Chromo[i].DNA[0][j] == 'G' || C.Chromo[i].DNA[0][j] == 'C')
+            {
+                if (C.Chromo[i].DNA[0][j] != char(138 - C.Chromo[i].DNA[1][j]))
+                {
+                    cnt1++;
+                }
+                else
+                {
+                    cnt3++;
+                }
+            }
+        }
+        if (cnt1 > 5)
+        {
+            cout << "Death" << endl;
+            delete &C;
+            break;
+        }
+        if ((cnt2 - cnt3) > (2 * cnt3))
+        {
+            cout << "Death" << endl;
+            delete &C;
+            break;
+        }else{
+            cout << "Alive"<<endl;
+        }
+    }
+}
+void Cell::JaheshS(char c, char h, int n, int m)
+{
+    Chromo[m].JaheshS(c, h, n);
+    cout << Chromo[m].DNA[0] << endl;
+    cout << Chromo[m].DNA[1] << endl;
+}
+void Cell::JaheshB(string s1, int n, string s2, int m)
+{
+    Chromo[n].JaheshB(s1, s2);
+    Chromo[m].JaheshB(s2, s1);
+    cout << Chromo[n].DNA[0] << endl;
+    cout << Chromo[n].DNA[1] << endl;
+    cout << Chromo[m].DNA[0] << endl;
+    cout << Chromo[m].DNA[1] << endl;
+}
+void Cell::JaheshR(string s1, int n)
+{
+    Chromo[n].JaheshR(s1);
+    cout << Chromo[n].DNA[0] << endl;
+    cout << Chromo[n].DNA[1] << endl;
+}
+void Cell::palin(int n)
+{
+    string s = "";
+    int cnt = 0;
+    for (int i = 0; i < Chromo[n].DNA[0].length(); i++)
+    {
+        for (int j = i; j < Chromo[n].DNA[0].length(); j++)
+        {
+            for (int k = i; k < j + 1; k++)
+            {
+                s += Chromo[n].DNA[0][k];
+            }
+            if (s.length() > 2 && s.length() % 2 == 0)
+            {
+                for (int k = 0; k < s.length() / 2; k++)
+                {
+                    if (s[k] == 'A' || s[k] == 'T')
+                    {
+                        if (s[k] == char(149 - s[s.length() - k - 1]))
+                        {
+                            cnt++;
+                        }
+                    }
+                    else
+                    {
+                        if (s[k] == char(138 - s[s.length() - k - 1]))
+                        {
+                            cnt++;
+                        }
+                    }
+                }
+                if (cnt == s.length() / 2)
+                {
+                    cout << s << endl;
+                }
 
+                cnt = 0;
+                s = "";
+            }
+            s = "";
+        }
+    }
+}

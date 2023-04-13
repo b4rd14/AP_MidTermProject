@@ -14,6 +14,7 @@ protected:
 public:
     friend class Cell;
     friend class Animal;
+    friend class Virus;
     void SetGen(string D2, string D1, string R);
     void ProduceRNA();
     void JaheshS(char c, char h, int n);
@@ -22,16 +23,17 @@ public:
     void JaheshB(string s1, string s2);
     void JaheshR(string s1);
 };
-class Cell : public Genome 
+class Cell : public Genome
 {
 protected:
     int No_Chromo;
 
 public:
-friend class Animal;
+    friend class Animal;
+    friend class Virus;
     vector<Genome> Chromo;
-    int Get_No_Chromo();
     void SetChromo(int n);
+    int Get_No_Chromo();
     void CellDeath(Cell &C);
     void JaheshS(char c, char h, int n, int m);
     void JaheshB(string s1, int n, string s2, int m);

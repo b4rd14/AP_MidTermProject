@@ -48,7 +48,7 @@ vector<int> Genome::prefixFunction(const string &pattern)
 }
 int Genome::kmpSearch(const string &text, const string &pattern)
 {
-    int index = 100000000;
+    int index = -1;
     int n = text.size();
     int m = pattern.size();
     vector<int> pi = Genome::prefixFunction(pattern);

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctype.h>
 #include <vector>
+#include <regex>
 #include "cell.cpp"
 #include "Animal.cpp"
 using namespace std;
@@ -17,89 +18,88 @@ int main()
     {
 
         cout << "what do you wnat to do?(just send the number)" << endl;
-        cout << "1.Create animal\n2.Jahesh kochak\n3.Jahesh bozorg\n4.Jahesh maakos\n5.Palindrom\n6.Check SimilaryDNA\n7.Asexual reproduction\n8.sexual reproduction";
+        cout << "1.Create animal\n2.Jahesh kochak\n3.Jahesh bozorg\n4.Jahesh maakos\n5.Palindrom\n6.Check SimilaryDNA\n7.Asexual reproduction\n8.sexual reproduction\n";
         try
         {
             int n;
+            cout << "Enter the number : ";
             cin >> n;
             if (n == 1)
             {
                 string name;
+                int chromo;
                 cout << "Set a name for your animal : ";
                 cin >> name;
+                cout << "Number of chromo : ";  
+                cin >> chromo;              
                 Animal *animal = new Animal;
+                animal->C[0].SetChromo(chromo);
                 animals.push_back(*animal);
                 names.push_back(name);
+
             }
             else if (n == 2 && animals.size() > 0)
             {
+                string n;
                 cout << "There are " << animals.size() << "animals" << endl;
                 cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
                 for (int i = 0; i < names.size(); i++)
                 {
                     cout << i + 1 << "." << names[i] << endl;
                 }
-            hell1:
-                try
+            hell:
+                cout << "Enter the number : ";
+                cin >> n;
+                if (regex_match(n, regex("\\d+")))
                 {
-                    int n;
-                    cout << "Enter the number : ";
-                    cin >> n;
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                hell:
-                    try
+                    if (stoi(n) > 0 && stoi(n) <= animals.size())
                     {
-
-                        int m, k;
-                        char c, h;
+                    hell1:
+                        cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n)-1].C[0].Get_No_Chromo() << ")" << endl;
+                        string m, k;
                         cout << "Enter the number : ";
                         cin >> m;
-                        cout << "First Character : ";
-                        cin >> c;
-                        cout << "Second Character : ";
-                        cin >> h;
-                        cout << "How many : ";
-                        cin >> k;
-                        if (c == 'A' || c == 'T' || c == 'G' || c == 'C')
+                        if (stoi(m) > 0 && stoi(m) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
                         {
-                            if (h == 'A' || h == 'T' || h == 'G' || h == 'C')
+                            cout << "How many : ";
+                            cin >> k;
+                            string c, h;
+                        hell2:
+                            cout << "First Character : ";
+                            cin >> c;
+                            cout << "Second Character : ";
+                            cin >> h;
+                            if (regex_match(c, regex("[ATCG]")) && regex_match(h, regex("[ATCG]")))
                             {
-                                animals[n - 1].C[0].JaheshS(c, h, k, m);
+                                animals[stoi(n) - 1].C[0].JaheshS(c.c_str()[0], h.c_str()[0], stoi(k), stoi(m));
                             }
                             else
                             {
-                                goto hell;
+                                cout << "Wrong Character" << endl;
+                                goto hell2;
                             }
                         }
                         else
                         {
-                            goto hell;
+                            cout << "just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                            goto hell1;
                         }
                     }
-                    catch (const out_of_range)
+                    else
                     {
-                        cerr << "just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                        goto hell;
-                    }
-                    catch (const exception)
-                    {
-                        cerr << "just a number!" << '\n';
+                        cout << "just a number between 1 to " << animals.size() << endl;
                         goto hell;
                     }
                 }
-                catch (const out_of_range)
+                else
                 {
-                    cerr << "just a numaber between 1 to " << animals.size() << endl;
-                    goto hell1;
-                }
-                catch (const exception)
-                {
-                    cerr << "just a number!" << '\n';
-                    goto hell1;
+                    cout << "just a number" <<endl;
+                    goto hell;
                 }
             }
             else if (n == 3 && animals.size() > 0)
             {
+                string n;
                 cout << "There are " << animals.size() << "animals" << endl;
                 cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
                 for (int i = 0; i < names.size(); i++)
@@ -107,275 +107,271 @@ int main()
                     cout << i + 1 << "." << names[i] << endl;
                 }
             hell3:
-                try
+                cout << "Enter the number : ";
+                cin >> n;
+                if (regex_match(n, regex("\\d+")))
                 {
-                    int n;
-                    cout << "Enter the number : ";
-                    cin >> n;
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                hell2:
-                    try
+                    if (stoi(n) > 0 && stoi(n) <= animals.size())
                     {
-
-                        int m, k;
-                        string s1, s2;
-                        cout << "First number : ";
+                    hell4:
+                        cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                        string m, k;
+                        cout << "Enter First number : ";
                         cin >> m;
-                        cout << "Second number : ";
+                        cout << "Enter Second number : ";
                         cin >> k;
-                        cout << "First String : ";
-                        cin >> s1;
-                        cout << "Second String : ";
-                        cin >> s2;
-
-                        animals[n - 1].JaheshB(s1, m, s2, k);
+                        if (stoi(m) > 0 && stoi(m) <= animals[stoi(n) - 1].C[0].Get_No_Chromo() && stoi(k) > 0 && stoi(k) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
+                        {
+                            string s1, s2;
+                            cout << "First string : ";
+                            cin >> s1;
+                            cout << "Second string : ";
+                            cin >> s2;
+                            animals[stoi(n) - 1].C[0].JaheshB(s1, stoi(m), s2, stoi(k));
+                        }
+                        else
+                        {
+                            cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                            goto hell4;
+                        }
                     }
-                    catch (const out_of_range)
+                    else
                     {
-                        cerr << "just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                        goto hell2;
-                    }
-                    catch (const exception)
-                    {
-                        cerr << "just a number!" << '\n';
-                        goto hell2;
+                        cout << "just a numaber between 1 to " << animals.size() << endl;
+                        goto hell3;
                     }
                 }
-                catch (const out_of_range)
+                else
                 {
-                    cerr << "just a numaber between 1 to " << animals.size() << endl;
-                    goto hell3;
-                }
-                catch (const exception)
-                {
-                    cerr << "just a number!" << '\n';
+                    cout << "just a numaber between 1 to " << animals.size() << endl;
                     goto hell3;
                 }
             }
             else if (n == 4 && animals.size() > 0)
             {
+                string n;
                 cout << "There are " << animals.size() << "animals" << endl;
                 cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
                 for (int i = 0; i < names.size(); i++)
                 {
                     cout << i + 1 << "." << names[i] << endl;
                 }
-            hell5:
-                try
+            hell6:
+                cout << "Enter the number : ";
+                cin >> n;
+                if (regex_match(n, regex("\\d+")))
                 {
-                    int n;
-                    cout << "Enter the number : ";
-                    cin >> n;
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                hell4:
-                    try
+                    if (stoi(n) > 0 && stoi(n) <= animals.size())
                     {
-
-                        int m;
-                        string s1;
-                        cout << "First number : ";
+                    hell7:
+                        cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                        string m;
+                        cout << "Enter the number : ";
                         cin >> m;
-                        cout << "First String : ";
-                        cin >> s1;
-
-                        animals[n - 1].JaheshR(s1, m);
+                        if (stoi(m) > 0 && stoi(m) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
+                        {
+                            string s1;
+                            cout << "First string : ";
+                            cin >> s1;
+                            animals[stoi(n) - 1].C[0].JaheshR(s1, stoi(m));
+                        }
+                        else
+                        {
+                            cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                            goto hell7;
+                        }
                     }
-                    catch (const out_of_range)
+                    else
                     {
-                        cerr << "just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                        goto hell4;
-                    }
-                    catch (const exception)
-                    {
-                        cerr << "just a number!" << '\n';
-                        goto hell4;
+                        cout << "just a numaber between 1 to " << animals.size() << endl;
+                        goto hell6;
                     }
                 }
-                catch (const out_of_range)
+                else
                 {
-                    cerr << "just a numaber between 1 to " << animals.size() << endl;
-                    goto hell5;
-                }
-                catch (const exception)
-                {
-                    cerr << "just a number!" << '\n';
-                    goto hell5;
+                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    goto hell6;
                 }
             }
             else if (n == 5 && animals.size() > 0)
             {
+                string n;
                 cout << "There are " << animals.size() << "animals" << endl;
                 cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
                 for (int i = 0; i < names.size(); i++)
                 {
                     cout << i + 1 << "." << names[i] << endl;
                 }
-            hell7:
-                try
+            hell8:
+                cout << "Enter the number : ";
+                cin >> n;
+                if (regex_match(n, regex("\\d+")))
                 {
-                    int n;
-                    cout << "Enter the number : ";
-                    cin >> n;
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                hell6:
-                    try
+                    if (stoi(n) > 0 && stoi(n) <= animals.size())
                     {
-
-                        int m;
-                        cout << "First number : ";
+                    hell9:
+                        cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                        string m;
+                        cout << "Enter the number : ";
                         cin >> m;
-
-                        animals[n - 1].palin(m);
+                        if (stoi(m) > 0 && stoi(m) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
+                        {
+                            animals[stoi(n) - 1].palin(stoi(m));
+                        }
+                        else
+                        {
+                            cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                            goto hell9;
+                        }
                     }
-                    catch (const out_of_range)
+                    else
                     {
-                        cerr << "just a numaber between 1 to " << animals[n - 1].C[0].Get_No_Chromo() << ")" << endl;
-                        goto hell6;
-                    }
-                    catch (const exception)
-                    {
-                        cerr << "just a number!" << '\n';
-                        goto hell6;
+                        cout << "just a numaber between 1 to " << animals.size() << endl;
+                        goto hell8;
                     }
                 }
-                catch (const out_of_range)
+                else
                 {
-                    cerr << "just a numaber between 1 to " << animals.size() << endl;
-                    goto hell7;
-                }
-                catch (const exception)
-                {
-                    cerr << "just a number!" << '\n';
-                    goto hell7;
+                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    goto hell8;
                 }
             }
             else if (n == 6 && animals.size() > 1)
             {
+                string n;
                 cout << "There are " << animals.size() << "animals" << endl;
                 cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
                 for (int i = 0; i < names.size(); i++)
                 {
                     cout << i + 1 << "." << names[i] << endl;
                 }
-            hell9:
-                try
+            hell10:
+                cout << "Enter the number : ";
+                cin >> n;
+                if (regex_match(n, regex("\\d+")))
                 {
-                    int n, m;
-                    cout << "First number : ";
-                    cin >> n;
-                    cout << "Second number : ";
-                    cin >> m;
-
-                hell8:
-                    try
+                    if (stoi(n) > 0 && stoi(n) <= animals.size())
                     {
-                        if (animals[n - 1] == animals[m - 1])
+                    hell11:
+                        cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                        string m, k;
+                        cout << "Enter First number : ";
+                        cin >> m;
+                        cout << "Enter Second number : ";
+                        cin >> k;
+                        if (stoi(m) > 0 && stoi(m) <= animals[stoi(n) - 1].C[0].Get_No_Chromo() && stoi(k) > 0 && stoi(k) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
                         {
-                            cout << "Same" << endl;
+                            if (animals[stoi(m) - 1] == animals[stoi(k) - 1])
+                            {
+                                cout << names[stoi(m) - 1] << " Same " << names[stoi(k) - 1] << endl;
+                            }
+                            else
+                            {
+                                cout << names[stoi(m) - 1] << " Not Same " << names[stoi(k) - 1] << endl;
+                            }
                         }
                         else
                         {
-                            cout << "Not Same" << endl;
+                            cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                            goto hell11;
                         }
                     }
-                    catch (const out_of_range)
+                    else
                     {
-                        cerr << "just a numaber between 1 to " << animals.size() << ")" << endl;
-                        goto hell8;
-                    }
-                    catch (const exception)
-                    {
-                        cerr << "just a number!" << '\n';
-                        goto hell8;
+                        cout << "just a numaber between 1 to " << animals.size() << endl;
+                        goto hell10;
                     }
                 }
-                catch (const exception)
+                else
                 {
-                    cerr << "just a number!" << '\n';
-                    goto hell9;
+                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    goto hell10;
                 }
             }
             else if (n == 7 && animals.size() > 0)
             {
+                string n;
                 cout << "There are " << animals.size() << "animals" << endl;
                 cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
                 for (int i = 0; i < names.size(); i++)
                 {
                     cout << i + 1 << "." << names[i] << endl;
                 }
-            hell11:
-                try
+            hell12:
+                cout << "Enter the number : ";
+                cin >> n;
+                if (regex_match(n, regex("\\d+")))
                 {
-                    int n;
-                    cout << "First number : ";
-                    cin >> n;
-                hell10:
-                    try
+                    if (stoi(n) > 0 && stoi(n) <= animals.size())
                     {
-                        sample.AsexuaRep(animals[n - 1].C);
+                    hell13:
+                        if (stoi(n) > 0 && stoi(n) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
+                        {
+                            animals[stoi(n) - 1].AsexuaRep(animals[stoi(n) - 1].C);
+                        }
+                        else
+                        {
+                            cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                            goto hell13;
+                        }
                     }
-                    catch (const out_of_range)
+                    else
                     {
-                        cerr << "just a numaber between 1 to " << animals.size() << ")" << endl;
-                        goto hell10;
-                    }
-                    catch (const exception)
-                    {
-                        cerr << "just a number!" << '\n';
-                        goto hell10;
+                        cout << "just a numaber between 1 to " << animals.size() << endl;
+                        goto hell12;
                     }
                 }
-                catch (const exception)
+                else
                 {
-                    cerr << "just a number!" << '\n';
-                    goto hell11;
+                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    goto hell12;
                 }
             }
             else if (n == 8 && animals.size() > 1)
             {
+                string n;
                 cout << "There are " << animals.size() << "animals" << endl;
                 cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
                 for (int i = 0; i < names.size(); i++)
                 {
                     cout << i + 1 << "." << names[i] << endl;
                 }
-            hell13:
-                try
+            hell14:
+                string m, k;
+                cout << "Enter First number : ";
+                cin >> m;
+                cout << "Enter Second number : ";
+                cin >> k;
+                if (regex_match(m ,regex("\\d+")) && regex_match(k ,regex("\\d+")) )
                 {
-                    int n, m;
-                    cout << "First number : ";
-                    cin >> n;
-                    cout << "Second number : ";
-                    cin >> m;
-
-                hell12:
-                    try
+                    if (stoi(n) > 0 && stoi(n) <= animals.size())
                     {
-                        if (animals[n - 1] == animals[m - 1])
+                    hell15:
+                        if (stoi(m) > 0 && stoi(m) <= animals[stoi(n) - 1].C[0].Get_No_Chromo() && stoi(k) > 0 && stoi(k) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
                         {
-                            cout << "Same" << endl;
+                            sample.SexuaRep(animals[stoi(m) - 1], animals[stoi(k) - 1]);
                         }
                         else
                         {
-                            cout << "Not Same" << endl;
+                            cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                            goto hell15;
                         }
                     }
-                    catch (const out_of_range)
+                    else
                     {
-                        cerr << "just a numaber between 1 to " << animals.size() << ")" << endl;
-                        goto hell12;
-                    }
-                    catch (const exception)
-                    {
-                        cerr << "just a number!" << '\n';
-                        goto hell12;
+                        cout << "just a numaber between 1 to " << animals.size() << endl;
+                        goto hell14;
                     }
                 }
-                catch (const exception)
+                else
                 {
-                    cerr << "just a number!" << '\n';
-                    goto hell13;
+                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    goto hell14;
                 }
+            }
+            else
+            {
+                cout << "The number of animals is not enough\n" << endl;
             }
         }
         catch (const exception)
@@ -383,6 +379,5 @@ int main()
             cerr << "just number!" << '\n';
         }
     }
-
     return 0;
 }

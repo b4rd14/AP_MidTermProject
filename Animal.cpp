@@ -199,3 +199,53 @@ void Animal::CellDeath(Cell &C)
         }
     }
 }
+void Virus::SetRNA(string R)
+{
+    string d1 = "";
+    string d2 = "";
+    vir.SetGen(d2, d1, R);
+}
+vector<string> Virus::CheckChromo(Animal &A){
+    int check=0;
+    vector<string> v;
+    string str = A.C[0].Chromo[0].DNA[0];
+    string substr="";
+    for (int len = 1; len <= str.length(); len++) 
+    {    
+        for (int i = 0; i <= str.length() - len; i++) 
+        {
+            int j = i + len - 1;            
+            for (int k = i; k <= j; k++){
+                substr +=str[k];
+            }
+            for (int i = 0; i < A.C[0].No_Chromo; i++)
+            {
+                if (kmpSearch(A.C[0].Chromo[i].DNA[0], substr) != -1){
+                    check++;
+                }
+                
+            }
+            if (check==A.C[0].No_Chromo){
+                v.push_back(substr);
+            }
+            check=0;
+            substr ="";
+        }
+    }
+}
+void Virus::CheckPathogenic(Animal &A){
+    for(int i=0;i<CheckChromo(A).size();i++){
+        for(int j=0;j<CheckChromo(A).size()-1;i++){
+            if (CheckChromo(A)[j].length()>CheckChromo(A)[j+1].length()){
+                swap(CheckChromo(A)[j],CheckChromo(A)[j+1]);
+            }
+        }
+    }
+    if(kmpSearch(vir.RNA,CheckChromo(A)[0])!=-1){
+        cout<<"Pathogenic"<<endl;
+    }
+    else{
+        cout<<"Non-Pathogenic"<<endl;
+    }
+
+}

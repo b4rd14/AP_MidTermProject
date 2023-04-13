@@ -80,9 +80,9 @@ Cell Animal::AsexuaRep(vector<Cell> &C)
 {
     int x = C[0].No_Chromo;
     Cell temp = C[0];
-    Cell tmp= C[0];
+    Cell tmp = C[0];
     temp.No_Chromo = 2 * x;
-    
+
     for (int i = x; i < 2 * x; i++)
     {
         Genome chromo;
@@ -114,7 +114,7 @@ Cell Animal::operator+(Animal &A)
 {
     Cell NC1 = AsexuaRep(A.C);
     Cell NC2 = AsexuaRep(C);
-    Cell tmp;
+    Cell tmp= NC1;
     Cell NC;
     for (int j = 0; j < 2 * 1000000000; j++)
     {
@@ -127,12 +127,12 @@ Cell Animal::operator+(Animal &A)
         for (int i = NC2.No_Chromo / 2; i < NC2.No_Chromo; i++)
         {
             tmp.Chromo[i] = NC2.Chromo[i];
-        }
+        } 
         if ((SimiDna(tmp, A.C[0]) + SimiDna(tmp, C[0])) / 1.5 > 70.0)
         {
             NC = tmp;
             A.C.push_back(NC);
-            cout << "Cell added " << endl;
+            C.push_back(NC);
             break;
         }
     }
@@ -152,6 +152,10 @@ void Animal::SexuaRep(Animal &A, Animal &B)
         }
         else
         {
+            for(int i =0;i<(A+B).No_Chromo;i++)
+            {
+                cout<<(A+B).Chromo[i].DNA[0]<<endl;
+            }
         }
     }
 }
@@ -205,47 +209,95 @@ void Virus::SetRNA(string R)
     string d2 = "";
     vir.SetGen(d2, d1, R);
 }
-vector<string> Virus::CheckChromo(Animal &A){
-    int check=0;
+vector<string> Virus::CheckChromo(Animal &A)
+{
+    int check = 0;
     vector<string> v;
     string str = A.C[0].Chromo[0].DNA[0];
-    string substr="";
-    for (int len = 1; len <= str.length(); len++) 
-    {    
-        for (int i = 0; i <= str.length() - len; i++) 
+    string substr = "";
+    for (int len = 1; len <= str.length(); len++)
+    {
+        for (int i = 0; i <= str.length() - len; i++)
         {
-            int j = i + len - 1;            
-            for (int k = i; k <= j; k++){
-                substr +=str[k];
+            int j = i + len - 1;
+            for (int k = i; k <= j; k++)
+            {
+                substr += str[k];
             }
             for (int i = 0; i < A.C[0].No_Chromo; i++)
             {
-                if (kmpSearch(A.C[0].Chromo[i].DNA[0], substr) != -1){
+                if (kmpSearch(A.C[0].Chromo[i].DNA[0], substr) != -1 || kmpSearch(A.C[0].Chromo[i].DNA[1], substr) != -1)
+                {
                     check++;
                 }
-                
             }
-            if (check==A.C[0].No_Chromo){
+            if (check == A.C[0].No_Chromo)
+            {
                 v.push_back(substr);
             }
-            check=0;
-            substr ="";
+            check = 0;
+            substr = "";
         }
     }
+    return v;
 }
-void Virus::CheckPathogenic(Animal &A){
-    for(int i=0;i<CheckChromo(A).size();i++){
-        for(int j=0;j<CheckChromo(A).size()-1;i++){
-            if (CheckChromo(A)[j].length()>CheckChromo(A)[j+1].length()){
-                swap(CheckChromo(A)[j],CheckChromo(A)[j+1]);
+string Change(string s){
+    string tmp = "";
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == 'A')
+        {
+            tmp += 'T';
+        }
+        else if (s[i] == 'T')
+        {
+            tmp += 'A';
+        }
+        else if (s[i] == 'G')
+        {
+            tmp += 'C';
+        }
+        else if (s[i] == 'C')
+        {
+            tmp += 'G';
+        }
+    }
+    return tmp;
+
+}
+void Virus::CheckPathogenic(Animal &A)
+{
+    vector<string> total;
+
+    string str = "";
+    for (int i = 0; i < CheckChromo(A).size(); i++)
+    {
+        if (kmpSearch(vir.RNA, CheckChromo(A)[i])!= -1 || kmpSearch(vir.RNA, Change(CheckChromo(A)[i])) != -1){
+            total.push_back(CheckChromo(A)[i]);
+        }
+    }
+    for (int i = 0; i < total.size(); i++)
+    {
+        for (int j = 0; j < total.size() - i - 1; j++)
+        {
+            if (total[j].length() < total[j + 1].length())
+            {
+                str = total[j];
+                total[j] = total[j + 1];
+                total[j + 1] = str;
             }
         }
     }
-    if(kmpSearch(vir.RNA,CheckChromo(A)[0])!=-1){
-        cout<<"Pathogenic"<<endl;
+    if (kmpSearch(vir.RNA, total[0])!= -1 || kmpSearch(vir.RNA, Change(total[0])) != -1)
+    {
+        cout << vir.RNA << endl;
+        cout << "Longest Common Substring "<< endl;
+        cout << total[0] << endl;
+        cout << Change(total[0]) << endl;
+        cout << "Pathogenic" << endl;
     }
-    else{
-        cout<<"Non-Pathogenic"<<endl;
+    else
+    {
+        cout << "Non-Pathogenic" << endl;
     }
-
 }

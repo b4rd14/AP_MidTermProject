@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <regex>
 #include <vector>
 #include "cell.h"
 using namespace std;
@@ -313,10 +314,21 @@ void Cell::SetChromo(int n)
     }
     for (int i = 0; i < No_Chromo; i++)
     {
+        hell:
         cout << "First String  : ";
         cin >> D1;
+        if(!regex_match(D1 ,regex("[ATCG]*"))){
+            cout << "Invalid Character"<<endl;
+            goto hell;
+            
+        }
         cout << "Second String : ";
         cin >> D2;
+        if(!regex_match(D2 ,regex("[ATCG]*"))){
+            cout << "Invalid Character"<<endl;
+            goto hell;
+            
+        }
         Chromo[i].SetGen(D1, D2);
         cout << endl;
     }

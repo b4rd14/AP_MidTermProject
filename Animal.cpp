@@ -9,34 +9,41 @@ Animal::Animal()
 {
     C.push_back(cell);
 }
-float Animal::Simi(string s1, string s2)
+int Simi(string first, string second)
 {
 
-    int n = s1.length();
-    int m = s2.length();
-    int cnt = 0;
-    if (n > m)
+	int m = first.length();
+	int n = second.length();
+
+	int T[m + 1][n + 1];
+    for (int i = 0; i <= m; i++)
     {
-        for (int i = 0; i < m; i++)
-        {
-            if (s1[i] != s2[i])
-            {
-                cnt++;
-            }
-        }
-        return (m - cnt) * 100 / n;
+        for (int j = 0; j <= n; j++)
+            T[i][j] = 0;
     }
-    else
-    {
-        for (int i = 0; i < n; i++)
-        {
-            if (s1[i] != s2[i])
-            {
-                cnt++;
-            }
-        }
-        return (n - cnt) * 100 / m;
-    }
+	for (int i = 1; i <= m; i++) {
+		T[i][0] = i;
+	}
+
+	for (int j = 1; j <= n; j++) {
+		T[0][j] = j;
+	}
+
+	for (int i = 1; i <= m; i++) {
+		for (int j = 1; j <= n; j++) {
+			int weight = first[i - 1] == second[j - 1] ? 0: 1;
+			T[i][j] = min(min(T[i-1][j] + 1, T[i][j-1] + 1), T[i-1][j-1] + weight);
+		}
+	}
+
+	return T[m][n];
+}
+float findStringSimilarity(string first, string second) {
+	float max_length = max(first.length(), second.length());
+	if (max_length > 0) {
+		return ((max_length - Simi(first, second)) / max_length)*100 ;
+	}
+	return 100.0;
 }
 float Animal::SimiDna(Cell &a, Cell &b)
 {
@@ -47,7 +54,7 @@ float Animal::SimiDna(Cell &a, Cell &b)
     {
         for (int i = 0; i < m; i++)
         {
-            sum += Simi(a.Chromo[i].DNA[0], b.Chromo[i].DNA[0]);
+            sum += findStringSimilarity(a.Chromo[i].DNA[0], b.Chromo[i].DNA[0]);
         }
         return sum / m;
     }
@@ -55,7 +62,7 @@ float Animal::SimiDna(Cell &a, Cell &b)
     {
         for (int i = 0; i < n; i++)
         {
-            sum += Simi(a.Chromo[i].DNA[0], b.Chromo[i].DNA[0]);
+            sum += findStringSimilarity(a.Chromo[i].DNA[0], b.Chromo[i].DNA[0]);
         }
         return sum / n;
     }
@@ -94,28 +101,30 @@ Cell Animal::AsexuaRep(vector<Cell> &C)
     }
     Cell NC;
     while (true)
-    {
+    {   
         random_shuffle(temp.Chromo.begin(), temp.Chromo.end());
         for (int i = 0; i < x; i++)
         {
             tmp.Chromo[i] = temp.Chromo[i];
         }
-        if (SimiDna(tmp, C[0]) > 70.0)
+        if (SimiDna(tmp, C[0]) >= 70.0)
         {
             NC = tmp;
             C.push_back(NC);
-            cout << "Cell added " << endl;
+            cout << "Cell added !" << endl;
             break;
         }
+
     }
     return NC;
 }
-Cell Animal::operator+(Animal &A)
+Animal Animal::operator+(Animal &A)
 {
     Cell NC1 = AsexuaRep(A.C);
     Cell NC2 = AsexuaRep(C);
     Cell tmp= NC1;
     Cell NC;
+    Animal t;
     for (int j = 0; j < 2 * 1000000000; j++)
     {
         random_shuffle(NC1.Chromo.begin(), NC1.Chromo.end());
@@ -128,15 +137,14 @@ Cell Animal::operator+(Animal &A)
         {
             tmp.Chromo[i] = NC2.Chromo[i];
         } 
-        if ((SimiDna(tmp, A.C[0]) + SimiDna(tmp, C[0])) / 1.5 > 70.0)
+        if ((SimiDna(tmp, A.C[0]) + SimiDna(tmp, C[0])) / 2 > 70.0)
         {
             NC = tmp;
-            A.C.push_back(NC);
-            C.push_back(NC);
-            break;
+            t.C[0]= NC; 
+            return t;  
         }
     }
-    return NC;
+    return t;
 }
 void Animal::SexuaRep(Animal &A, Animal &B)
 {
@@ -152,10 +160,19 @@ void Animal::SexuaRep(Animal &A, Animal &B)
         }
         else
         {
-            for(int i =0;i<(A+B).No_Chromo;i++)
-            {
-                cout<<(A+B).Chromo[i].DNA[0]<<endl;
+            Animal tmp = A + B;
+            if(tmp.C[0].Chromo.size()!=0){
+                cout << "new Animal created!!!"<<endl;
+                for(int i =0;i<tmp.C[0].No_Chromo;i++)
+                {
+                    cout << tmp.C[0].Chromo[i].DNA[0] <<endl;
+  
+                    cout << tmp.C[0].Chromo[i].DNA[1] << endl;
+                }
+            }else{
+                cout <<"mission failed !!!"<< endl;
             }
+            
         }
     }
 }
@@ -163,7 +180,7 @@ void Animal::CellDeath(Cell &C)
 {
     for (int i = 0; i < C.No_Chromo; i++)
     {
-        int cnt1 = 0, cnt2 = 0, cnt3 = 0;
+        int cnt1 = 0, cnt2 = 0, cnt3 = 0,cnt4=0;
         for (int j = 0; j < C.Chromo[i].DNA[0].length(); j++)
         {
             if (C.Chromo[i].DNA[0][j] == 'A' || C.Chromo[i].DNA[0][j] == 'T')

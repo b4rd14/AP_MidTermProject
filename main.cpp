@@ -19,7 +19,7 @@ int main()
     while (tolower(t) != 'n')
     {
         cout << "what do you wnat to do?(just send the number)" << endl;
-        cout << "1.Create animal\n2.Jahesh kochak\n3.Jahesh bozorg\n4.Jahesh maakos\n5.Palindrom\n6.Check SimilaryDNA\n7.Asexual reproduction\n8.sexual reproduction\n9.Create Virus\n10.CheckPathogenic\n";
+        cout << "1.Create animal\n2.Jahesh kochak\n3.Jahesh bozorg\n4.Jahesh maakos\n5.Palindrom\n6.Check SimilaryDNA\n7.Asexual reproduction\n8.sexual reproduction\n9.Create Virus\n10.CheckPathogenic\n11.CellDeath\n12.Close app\n";
         int n;
         cout << "Enter the number : ";
         cin >> n;
@@ -424,6 +424,48 @@ int main()
                 cout << "just a numaber between 1 to " << viruses.size() << endl;
                 goto hell16;
             }
+        }
+        else if(n==11 &&animals.size()>0)
+        {
+            cout << "There are " << animals.size() << " animals" << endl;
+            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            for (int i = 0; i < Anames.size(); i++)
+            {
+                cout << i + 1 << "." << Anames[i] << endl;
+            }
+        hell18:
+            string m;
+            cout << "Enter Animal number : ";
+            cin >> m;
+            if (regex_match(m ,regex("\\d+")) )
+            {
+                if (stoi(m) > 0 && stoi(m) <= animals.size())
+                {
+                hell19:
+                    if (stoi(m) > 0 && stoi(m) <= animals.size())
+                    {
+                        animals[stoi(m) - 1].CellDeath(animals[stoi(m) - 1].C[0]);
+                    }
+                    else
+                    {
+                        cout << "just a number between 1 to " << animals.size() << endl;
+                        goto hell19;
+                    }
+                }
+                else
+                {
+                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    goto hell18;
+                }
+            }
+            else
+            {
+                cout << "just a numaber between 1 to " << animals.size() << endl;
+                goto hell18;
+            }
+        }
+        else if(n==12){
+            t = 'n';
         }
         else
         {

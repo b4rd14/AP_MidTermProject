@@ -13,10 +13,9 @@ public:
     vector<Cell> C;
     Animal();
     float SimiDna(Cell &a, Cell &b);
-    float Simi(string s1, string s2);
     float operator==(Animal &A);
     Cell AsexuaRep(vector<Cell> &C);
-    Cell operator+(Animal &A);
+    Animal operator+(Animal &A);
     void SexuaRep(Animal &A, Animal &B);
     void CellDeath(Cell &C);
 };

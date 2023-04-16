@@ -75,15 +75,6 @@ int Genome::kmpSearch(const string &text, const string &pattern)
 void Genome::JaheshS(char c, char h, int n)
 {
     int cnt = 0;
-    for (int i = 0; i < RNA.length(); i++)
-    {
-        if (RNA[i] == c && cnt <= n)
-        {
-            RNA[i] = h;
-            cnt++;
-        }
-    }
-    cnt = 0;
     for (int i = 0; i < DNA[0].length(); i++)
     {
         if (cnt < n)
@@ -116,191 +107,161 @@ void Genome::JaheshS(char c, char h, int n)
                 cnt++;
             }
         }
+
     }
+    cout << DNA[0] << endl;
+    cout << DNA[1] << endl;
 }
 void Genome::JaheshB(string s1, string s2)
-
 {
-    string temp = "";
-    for (int i = 0; i < RNA.length() - s1.length(); i++)
-    {
-        for (int j = i; j < i + s1.length(); j++)
+    if(Genome::kmpSearch(DNA[0], s1)!=-1 && Genome::kmpSearch(DNA[0], s1)!=-1){
+        if ((Genome::kmpSearch(DNA[0], s1) < Genome::kmpSearch(DNA[1], s1)))
         {
-            temp += RNA[j];
-        }
-        if (temp == s1)
-        {
-            string part1 = "", part3 = "";
-            for (int k = 0; k < i; k++)
+            string part11 = "", part13 = "";
+            string part01 = "", part03 = "";
+            string s22 = "";
+            for (int k = 0; k < Genome::kmpSearch(DNA[0], s1); k++)
             {
-                part1 += RNA[k];
+                part01 += DNA[0][k];
+                part11 += DNA[1][k];
             }
-            for (int l = i + s1.length(); l < RNA.length(); l++)
+            for (int m = 0; m < s2.length(); m++)
             {
-                part3 += RNA[l];
+                if (s2[m] == 'A' || s2[m] == 'T')
+                {
+                    s22 += char(149 - s2[m]);
+                }
+                else
+                {
+                    s22 += char(138 - s2[m]);
+                }
             }
-            i = i + s1.length();
-            RNA = part1 + s2 + part3;
-        }
-        temp = "";
-    }
-    if (Genome::kmpSearch(DNA[0], s1) < Genome::kmpSearch(DNA[1], s1))
-    {
-        string part11 = "", part13 = "";
-        string part01 = "", part03 = "";
-        string s22 = "";
-        for (int k = 0; k < Genome::kmpSearch(DNA[0], s1); k++)
-        {
-            part01 += DNA[0][k];
-            part11 += DNA[1][k];
-        }
-        for (int m = 0; m < s2.length(); m++)
-        {
-            if (s2[m] == 'A' || s2[m] == 'T')
+            for (int l = Genome::kmpSearch(DNA[0], s1) + s1.length(); l < DNA[0].length(); l++)
             {
-                s22 += char(149 - s2[m]);
+                part03 += DNA[0][l];
+                part13 += DNA[1][l];
             }
-            else
-            {
-                s22 += char(138 - s2[m]);
-            }
-        }
-        for (int l = Genome::kmpSearch(DNA[0], s1) + s1.length(); l < DNA[0].length(); l++)
-        {
-            part03 += DNA[0][l];
-            part13 += DNA[1][l];
-        }
 
-        DNA[0] = part01 + s2 + part03;
-        DNA[1] = part11 + s22 + part13;
+            DNA[0] = part01 + s2 + part03;
+            DNA[1] = part11 + s22 + part13;
+            cout << DNA[0] << endl;
+            cout << DNA[1] << endl;
+            
+        }
+        else
+        {
+            string part11 = "", part13 = "";
+            string part01 = "", part03 = "";
+            string s22 = "";
+            for (int k = 0; k < Genome::kmpSearch(DNA[1], s1); k++)
+            {
+                part01 += DNA[0][k];
+                part11 += DNA[1][k];
+            }
+            for (int m = 0; m < s2.length(); m++)
+            {
+                if (s2[m] == 'A' || s2[m] == 'T')
+                {
+                    s22 += char(149 - s2[m]);
+                }
+                else
+                {
+                    s22 += char(138 - s2[m]);
+                }
+            }
+            for (int l = Genome::kmpSearch(DNA[1], s1) + s1.length(); l < DNA[0].length(); l++)
+            {
+                part03 += DNA[0][l];
+                part13 += DNA[1][l];
+            }
+            DNA[0] = part01 + s22 + part03;
+            DNA[1] = part11 + s2 + part13;
+            cout << DNA[0] << endl;
+            cout << DNA[1] << endl;
+        }
     }
-    else
-    {
-        string part11 = "", part13 = "";
-        string part01 = "", part03 = "";
-        string s22 = "";
-        for (int k = 0; k < Genome::kmpSearch(DNA[1], s1); k++)
-        {
-            part01 += DNA[0][k];
-            part11 += DNA[1][k];
-        }
-        for (int m = 0; m < s2.length(); m++)
-        {
-            if (s2[m] == 'A' || s2[m] == 'T')
-            {
-                s22 += char(149 - s2[m]);
-            }
-            else
-            {
-                s22 += char(138 - s2[m]);
-            }
-        }
-        for (int l = Genome::kmpSearch(DNA[1], s1) + s1.length(); l < DNA[0].length(); l++)
-        {
-            part03 += DNA[0][l];
-            part13 += DNA[1][l];
-        }
-        DNA[0] = part01 + s22 + part03;
-        DNA[1] = part11 + s2 + part13;
+    else{
+        cout << "String not found"<<endl;
     }
 }
 void Genome::JaheshR(string s1)
 {
-    string temp = "";
-    string Ns1 = "";
-    for (int i = 0; i < RNA.length() - s1.length(); i++)
-    {
-        for (int j = i; j < i + s1.length(); j++)
+    if(Genome::kmpSearch(DNA[0], s1)!=-1 && Genome::kmpSearch(DNA[0], s1)!=-1){
+        string temp0 = "";
+        string temp1 = "";
+        string Ns01 = "";
+        string RNs01 = "";
+        string Ns11 = "";
+        string RNs11 = "";
+        if (Genome::kmpSearch(DNA[0], s1) < Genome::kmpSearch(DNA[1], s1))
         {
-            temp += RNA[j];
-        }
-        if (temp == s1)
-        {
-            string p1 = "", p3 = "";
-            for (int k = 0; k < i; k++)
+            string p11 = "", p13 = "";
+            string p01 = "", p03 = "";
+            string s22 = "";
+            for (int k = 0; k < Genome::kmpSearch(DNA[0], s1); k++)
             {
-                p1 += RNA[k];
+                p01 += DNA[0][k];
+                p11 += DNA[1][k];
             }
             for (int m = 0; m < s1.length(); m++)
             {
-                Ns1 += s1[s1.length() - m - 1];
+                if (s1[m] == 'A' || s1[m] == 'T')
+                {
+                    Ns01 += s1[s1.length() - m - 1];
+                    RNs01 = char(149 - s1[m]) + RNs01;
+                }
+                else
+                {
+                    Ns01 += s1[s1.length() - m - 1];
+                    RNs01 = char(138 - s1[m]) + RNs01;
+                }
             }
-            for (int l = i + s1.length(); l < RNA.length(); l++)
+            for (int l = Genome::kmpSearch(DNA[0], s1) + s1.length(); l < DNA[0].length(); l++)
             {
-                p3 += RNA[l];
+                p03 += DNA[0][l];
+                p13 += DNA[1][l];
             }
-            i = i + s1.length();
-            RNA = p1 + Ns1 + p3;
+            DNA[0] = p01 + Ns01 + p03;
+            DNA[1] = p11 + RNs01 + p13;
+            cout << DNA[0] << endl;
+            cout << DNA[1] << endl;
         }
-        temp = "";
+        else
+        {
+            string p11 = "", p13 = "";
+            string p01 = "", p03 = "";
+            string s22 = "";
+            for (int k = 0; k < Genome::kmpSearch(DNA[1], s1); k++)
+            {
+                p01 += DNA[0][k];
+                p11 += DNA[1][k];
+            }
+            for (int m = 0; m < s1.length(); m++)
+            {
+                if (s1[m] == 'A' || s1[m] == 'T')
+                {
+                    Ns11 += s1[s1.length() - m - 1];
+                    RNs11 = char(149 - s1[m]) + RNs11;
+                }
+                else
+                {
+                    Ns11 += s1[s1.length() - m - 1];
+                    RNs11 = char(138 - s1[m]) + RNs11;
+                }
+            }
+            for (int l = Genome::kmpSearch(DNA[1], s1) + s1.length(); l < DNA[0].length(); l++)
+            {
+                p03 += DNA[0][l];
+                p13 += DNA[1][l];
+            }
+            DNA[0] = p01 + RNs11 + p03;
+            DNA[1] = p11 + Ns11 + p13;
+            cout << DNA[0] << endl;
+            cout << DNA[1] << endl;
+        }
     }
-    string temp0 = "";
-    string temp1 = "";
-    string Ns01 = "";
-    string RNs01 = "";
-    string Ns11 = "";
-    string RNs11 = "";
-    if (Genome::kmpSearch(DNA[0], s1) < Genome::kmpSearch(DNA[1], s1))
-    {
-        string p11 = "", p13 = "";
-        string p01 = "", p03 = "";
-        string s22 = "";
-        for (int k = 0; k < Genome::kmpSearch(DNA[0], s1); k++)
-        {
-            p01 += DNA[0][k];
-            p11 += DNA[1][k];
-        }
-        for (int m = 0; m < s1.length(); m++)
-        {
-            if (s1[m] == 'A' || s1[m] == 'T')
-            {
-                Ns01 += s1[s1.length() - m - 1];
-                RNs01 = char(149 - s1[m]) + RNs01;
-            }
-            else
-            {
-                Ns01 += s1[s1.length() - m - 1];
-                RNs01 = char(138 - s1[m]) + RNs01;
-            }
-        }
-        for (int l = Genome::kmpSearch(DNA[0], s1) + s1.length(); l < DNA[0].length(); l++)
-        {
-            p03 += DNA[0][l];
-            p13 += DNA[1][l];
-        }
-        DNA[0] = p01 + Ns01 + p03;
-        DNA[1] = p11 + RNs01 + p13;
-    }
-    else
-    {
-        string p11 = "", p13 = "";
-        string p01 = "", p03 = "";
-        string s22 = "";
-        for (int k = 0; k < Genome::kmpSearch(DNA[1], s1); k++)
-        {
-            p01 += DNA[0][k];
-            p11 += DNA[1][k];
-        }
-        for (int m = 0; m < s1.length(); m++)
-        {
-            if (s1[m] == 'A' || s1[m] == 'T')
-            {
-                Ns11 += s1[s1.length() - m - 1];
-                RNs11 = char(149 - s1[m]) + RNs11;
-            }
-            else
-            {
-                Ns11 += s1[s1.length() - m - 1];
-                RNs11 = char(138 - s1[m]) + RNs11;
-            }
-        }
-        for (int l = Genome::kmpSearch(DNA[1], s1) + s1.length(); l < DNA[0].length(); l++)
-        {
-            p03 += DNA[0][l];
-            p13 += DNA[1][l];
-        }
-        DNA[0] = p01 + RNs11 + p03;
-        DNA[1] = p11 + Ns11 + p13;
+    else{
+        cout << "String not found"<<endl;
     }
 }
 void Cell::SetChromo(int n)
@@ -329,7 +290,7 @@ void Cell::SetChromo(int n)
             goto hell;
             
         }
-        Chromo[i].SetGen(D1, D2);
+        Chromo[i].SetGen(D1, D2,"");
         cout << endl;
     }
 }
@@ -385,23 +346,15 @@ void Cell::CellDeath(Cell &C)
 void Cell::JaheshS(char c, char h, int n, int m)
 {
     Chromo[m].JaheshS(c, h, n);
-    cout << Chromo[m].DNA[0] << endl;
-    cout << Chromo[m].DNA[1] << endl;
 }
 void Cell::JaheshB(string s1, int n, string s2, int m)
 {
     Chromo[n].JaheshB(s1, s2);
     Chromo[m].JaheshB(s2, s1);
-    cout << Chromo[n].DNA[0] << endl;
-    cout << Chromo[n].DNA[1] << endl;
-    cout << Chromo[m].DNA[0] << endl;
-    cout << Chromo[m].DNA[1] << endl;
 }
 void Cell::JaheshR(string s1, int n)
 {
     Chromo[n].JaheshR(s1);
-    cout << Chromo[n].DNA[0] << endl;
-    cout << Chromo[n].DNA[1] << endl;
 }
 void Cell::palin(int n)
 {

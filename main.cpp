@@ -70,7 +70,7 @@ int main()
                         cin >> h;
                         if (regex_match(c, regex("[ATCG]")) && regex_match(h, regex("[ATCG]")))
                         {
-                            animals[stoi(n) - 1].C[0].JaheshS(c.c_str()[0], h.c_str()[0], stoi(k), stoi(m));
+                            animals[stoi(n) - 1].C[0].JaheshS(c.c_str()[0], h.c_str()[0], stoi(k), stoi(m)-1);
                         }
                         else
                         {
@@ -126,7 +126,7 @@ int main()
                         cin >> s1;
                         cout << "Second string : ";
                         cin >> s2;
-                        animals[stoi(n) - 1].C[0].JaheshB(s1, stoi(m), s2, stoi(k));
+                        animals[stoi(n) - 1].C[0].JaheshB(s1, stoi(m)-1, s2, stoi(k)-1);
                     }
                     else
                     {
@@ -215,7 +215,7 @@ int main()
                     cin >> m;
                     if (stoi(m) > 0 && stoi(m) <= animals[stoi(n) - 1].C[0].Get_No_Chromo())
                     {
-                        animals[stoi(n) - 1].palin(stoi(m));
+                        animals[stoi(n) - 1].C[0].palin(stoi(m)-1);
                     }
                     else
                     {

@@ -166,7 +166,6 @@ void Animal::SexuaRep(Animal &A, Animal &B)
                 for(int i =0;i<tmp.C[0].No_Chromo;i++)
                 {
                     cout << tmp.C[0].Chromo[i].DNA[0] <<endl;
-  
                     cout << tmp.C[0].Chromo[i].DNA[1] << endl;
                 }
             }else{
@@ -317,4 +316,77 @@ void Virus::CheckPathogenic(Animal &A)
     {
         cout << "Non-Pathogenic" << endl;
     }
+}
+void Virus::JaheshS(char c, char h, int n){
+    int cnt = 0;
+    for (int i = 0; i < RNA.length(); i++)
+    {
+        if (RNA[i] == c && cnt <= n)
+        {
+            RNA[i] = h;
+            cnt++;
+        }
+    }
+    cout << RNA << endl;
+}
+void Virus::JaheshB(string s1,string s2){
+    string temp = "";
+    for (int i = 0; i < RNA.length() - s1.length(); i++)
+    {
+        for (int j = i; j < i + s1.length(); j++)
+        {
+            temp += RNA[j];
+        }
+        if (temp == s1)
+        {
+            string part1 = "", part3 = "";
+            for (int k = 0; k < i; k++)
+            {
+                part1 += RNA[k];
+            }
+            for (int l = i + s1.length(); l < RNA.length(); l++)
+            {
+                part3 += RNA[l];
+            }
+            i = i + s1.length();
+            RNA = part1 + s2 + part3;
+        }
+        temp = "";
+    }
+    cout << RNA << endl;
+}
+void Virus::JaheshR(string s1){
+    string temp = "";
+    string Ns1 = "";
+    for (int i = 0; i < RNA.length() - s1.length(); i++)
+    {
+        for (int j = i; j < i + s1.length(); j++)
+        {
+            temp += RNA[j];
+        }
+        if (temp == s1)
+        {
+            string p1 = "", p3 = "";
+            for (int k = 0; k < i; k++)
+            {
+                p1 += RNA[k];
+            }
+            for (int m = 0; m < s1.length(); m++)
+            {
+                Ns1 += s1[s1.length() - m - 1];
+            }
+            for (int l = i + s1.length(); l < RNA.length(); l++)
+            {
+                p3 += RNA[l];
+            }
+            i = i + s1.length();
+            RNA = p1 + Ns1 + p3;
+        }
+        temp = "";
+    }
+    cout << RNA << endl;
+}
+void Virus::ProduceRNA()
+{
+    ProduceRNA();
 }

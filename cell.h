@@ -26,7 +26,7 @@ public:
 class Cell : public Genome
 {
 protected:
-    int No_Chromo;
+    int No_Chromo=0;
 
 public:
     friend class Animal;

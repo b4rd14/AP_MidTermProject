@@ -29,5 +29,9 @@ public:
     void SetRNA(string R);
     vector<string> CheckChromo(Animal &A);
     void CheckPathogenic(Animal &A);
+    void JaheshS(char c, char h, int n);
+    void JaheshB(string s1, string s2);
+    void JaheshR(string s1);
+    void ProduceRNA();
 };
 #endif

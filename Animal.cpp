@@ -242,7 +242,7 @@ vector<string> Virus::CheckChromo(Animal &A)
             }
             for (int i = 0; i < A.C[0].No_Chromo; i++)
             {
-                if (kmpSearch(A.C[0].Chromo[i].DNA[0], substr) != -1 || kmpSearch(A.C[0].Chromo[i].DNA[1], substr) != -1)
+                if (kmpSearch(A.C[0].Chromo[i].DNA[0], substr) != 1000000000 || kmpSearch(A.C[0].Chromo[i].DNA[1], substr) != 1000000000)
                 {
                     check++;
                 }
@@ -288,7 +288,7 @@ void Virus::CheckPathogenic(Animal &A)
     string str = "";
     for (int i = 0; i < CheckChromo(A).size(); i++)
     {
-        if (kmpSearch(vir.RNA, CheckChromo(A)[i])!= -1 || kmpSearch(vir.RNA, Change(CheckChromo(A)[i])) != -1){
+        if (kmpSearch(vir.RNA, CheckChromo(A)[i])!= 1000000000 || kmpSearch(vir.RNA, Change(CheckChromo(A)[i])) != 1000000000){
             total.push_back(CheckChromo(A)[i]);
         }
     }
@@ -304,7 +304,7 @@ void Virus::CheckPathogenic(Animal &A)
             }
         }
     }
-    if (kmpSearch(vir.RNA, total[0])!= -1 || kmpSearch(vir.RNA, Change(total[0])) != -1)
+    if (kmpSearch(vir.RNA, total[0])!= 1000000000 || kmpSearch(vir.RNA, Change(total[0])) != 1000000000)
     {
         cout << vir.RNA << endl;
         cout << "Longest Common Substring "<< endl;

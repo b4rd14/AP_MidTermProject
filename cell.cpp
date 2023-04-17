@@ -49,7 +49,7 @@ vector<int> Genome::prefixFunction(const string &pattern)
 }
 int Genome::kmpSearch(const string &text, const string &pattern)
 {
-    int index = -1;
+    int index = 1000000000;
     int n = text.size();
     int m = pattern.size();
     vector<int> pi = Genome::prefixFunction(pattern);
@@ -114,7 +114,7 @@ void Genome::JaheshS(char c, char h, int n)
 }
 void Genome::JaheshB(string s1, string s2)
 {
-    if(Genome::kmpSearch(DNA[0], s1)!=-1 && Genome::kmpSearch(DNA[0], s1)!=-1){
+    if(Genome::kmpSearch(DNA[0], s1)!=1000000000 && Genome::kmpSearch(DNA[0], s1)!=1000000000){
         if ((Genome::kmpSearch(DNA[0], s1) < Genome::kmpSearch(DNA[1], s1)))
         {
             string part11 = "", part13 = "";
@@ -187,7 +187,7 @@ void Genome::JaheshB(string s1, string s2)
 }
 void Genome::JaheshR(string s1)
 {
-    if(Genome::kmpSearch(DNA[0], s1)!=-1 && Genome::kmpSearch(DNA[0], s1)!=-1){
+    if(Genome::kmpSearch(DNA[0], s1)!=1000000000 || Genome::kmpSearch(DNA[1], s1)!=1000000000){
         string temp0 = "";
         string temp1 = "";
         string Ns01 = "";

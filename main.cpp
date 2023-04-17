@@ -171,7 +171,7 @@ int main()
                         string s1;
                         cout << "First string : ";
                         cin >> s1;
-                        animals[stoi(n) - 1].C[0].JaheshR(s1, stoi(m));
+                        animals[stoi(n) - 1].C[0].JaheshR(s1, stoi(m)-1);
                     }
                     else
                     {

@@ -114,7 +114,7 @@ void Genome::JaheshS(char c, char h, int n)
 }
 void Genome::JaheshB(string s1, string s2)
 {
-    if(Genome::kmpSearch(DNA[0], s1)!=1000000000 && Genome::kmpSearch(DNA[0], s1)!=1000000000){
+    if(Genome::kmpSearch(DNA[0], s1)!=1000000000 || Genome::kmpSearch(DNA[1], s1)!=1000000000){
         if ((Genome::kmpSearch(DNA[0], s1) < Genome::kmpSearch(DNA[1], s1)))
         {
             string part11 = "", part13 = "";
@@ -169,7 +169,7 @@ void Genome::JaheshB(string s1, string s2)
                     s22 += char(138 - s2[m]);
                 }
             }
-            for (int l = Genome::kmpSearch(DNA[1], s1) + s1.length(); l < DNA[0].length(); l++)
+            for (int l = Genome::kmpSearch(DNA[1], s1) + s1.length(); l < DNA[1].length(); l++)
             {
                 part03 += DNA[0][l];
                 part13 += DNA[1][l];

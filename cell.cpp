@@ -178,6 +178,7 @@ void Genome::JaheshB(string s1, string s2)
             DNA[1] = part11 + s2 + part13;
             cout << DNA[0] << endl;
             cout << DNA[1] << endl;
+            
         }
     }
     else{

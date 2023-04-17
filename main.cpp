@@ -8,7 +8,6 @@ using namespace std;
 
 int main()
 {
-
     char t;
     vector<Animal> animals;
     vector<Virus> viruses;    
@@ -41,7 +40,7 @@ int main()
         {
             string n;
             cout << "There are " << animals.size() << "animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -54,7 +53,7 @@ int main()
                 if (stoi(n) > 0 && stoi(n) <= animals.size())
                 {
                 hell1:
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n)-1].C[0].Get_No_Chromo() << ")" << endl;
+                    cout << "Which Chromo?(just a number between 1 to " << animals[stoi(n)-1].C[0].Get_No_Chromo() << ")" << endl;
                     string m, k;
                     cout << "Enter the number : ";
                     cin >> m;
@@ -100,7 +99,7 @@ int main()
         {
             string n;
             cout << "There are " << animals.size() << "animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -113,7 +112,7 @@ int main()
                 if (stoi(n) > 0 && stoi(n) <= animals.size())
                 {
                 hell4:
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                    cout << "Which Chromo?(just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
                     string m, k;
                     cout << "Enter First number : ";
                     cin >> m;
@@ -130,19 +129,19 @@ int main()
                     }
                     else
                     {
-                        cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                        cout << "just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
                         goto hell4;
                     }
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    cout << "just a number between 1 to " << animals.size() << endl;
                     goto hell3;
                 }
             }
             else
             {
-                cout << "just a numaber between 1 to " << animals.size() << endl;
+                cout << "just a number between 1 to " << animals.size() << endl;
                 goto hell3;
             }
         }
@@ -150,7 +149,7 @@ int main()
         {
             string n;
             cout << "There are " << animals.size() << "animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -163,7 +162,7 @@ int main()
                 if (stoi(n) > 0 && stoi(n) <= animals.size())
                 {
                 hell7:
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                    cout << "Which Chromo?(just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
                     string m;
                     cout << "Enter the number : ";
                     cin >> m;
@@ -176,19 +175,19 @@ int main()
                     }
                     else
                     {
-                        cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                        cout << "just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
                         goto hell7;
                     }
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    cout << "just a number between 1 to " << animals.size() << endl;
                     goto hell6;
                 }
             }
             else
             {
-                cout << "just a numaber between 1 to " << animals.size() << endl;
+                cout << "just a number between 1 to " << animals.size() << endl;
                 goto hell6;
             }
         }
@@ -196,7 +195,7 @@ int main()
         {
             string n;
             cout << "There are " << animals.size() << "animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -209,7 +208,7 @@ int main()
                 if (stoi(n) > 0 && stoi(n) <= animals.size())
                 {
                 hell9:
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                    cout << "Which Chromo?(just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
                     string m;
                     cout << "Enter the number : ";
                     cin >> m;
@@ -219,19 +218,19 @@ int main()
                     }
                     else
                     {
-                        cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                        cout << "just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
                         goto hell9;
                     }
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    cout << "just a number between 1 to " << animals.size() << endl;
                     goto hell8;
                 }
             }
             else
             {
-                cout << "just a numaber between 1 to " << animals.size() << endl;
+                cout << "just a number between 1 to " << animals.size() << endl;
                 goto hell8;
             }
         }
@@ -239,7 +238,7 @@ int main()
         {
             string n;
             cout << "There are " << animals.size() << "animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -252,7 +251,7 @@ int main()
                 if (stoi(n) > 0 && stoi(n) <= animals.size())
                 {
                 hell11:
-                    cout << "Which Chromo?(just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
+                    cout << "Which Chromo?(just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << ")" << endl;
                     string m, k;
                     cout << "Enter First number : ";
                     cin >> m;
@@ -271,19 +270,19 @@ int main()
                     }
                     else
                     {
-                        cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                        cout << "just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
                         goto hell11;
                     }
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    cout << "just a number between 1 to " << animals.size() << endl;
                     goto hell10;
                 }
             }
             else
             {
-                cout << "just a numaber between 1 to " << animals.size() << endl;
+                cout << "just a number between 1 to " << animals.size() << endl;
                 goto hell10;
             }
         }
@@ -291,7 +290,7 @@ int main()
         {
             string n;
             cout << "There are " << animals.size() << "animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -310,19 +309,19 @@ int main()
                     }
                     else
                     {
-                        cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                        cout << "just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
                         goto hell13;
                     }
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    cout << "just a number between 1 to " << animals.size() << endl;
                     goto hell12;
                 }
             }
             else
             {
-                cout << "just a numaber between 1 to " << animals.size() << endl;
+                cout << "just a number between 1 to " << animals.size() << endl;
                 goto hell12;
             }
         }
@@ -330,7 +329,7 @@ int main()
         {
             string n;
             cout << "There are " << animals.size() << "animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -351,14 +350,14 @@ int main()
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
+                    cout << "just a number between 1 to " << animals[stoi(n) - 1].C[0].Get_No_Chromo() << endl;
                     goto hell15;
                 }
     
             }
             else
             {
-                cout << "just a numaber between 1 to " << animals.size() << endl;
+                cout << "just a number between 1 to " << animals.size() << endl;
                 goto hell14;
             }
         }
@@ -381,13 +380,13 @@ int main()
         {
             string n;
             cout << "There are " << viruses.size() << " viruses" << endl;
-            cout << "Which one?(just a numaber between 1 to " << viruses.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << viruses.size() << ")" << endl;
             for (int i = 0; i < Vnames.size(); i++)
             {
                 cout << i + 1 << "." << Vnames[i] << endl;
             }
             cout << "There are " << animals.size() << " animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -409,26 +408,26 @@ int main()
                     }
                     else
                     {
-                        cout << "just a numaber between 1 to " << animals.size() << endl;
+                        cout << "just a number between 1 to " << animals.size() << endl;
                         goto hell17;
                     }
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << viruses.size() << endl;
+                    cout << "just a number between 1 to " << viruses.size() << endl;
                     goto hell16;
                 }
             }
             else
             {
-                cout << "just a numaber between 1 to " << viruses.size() << endl;
+                cout << "just a number between 1 to " << viruses.size() << endl;
                 goto hell16;
             }
         }
         else if(n==11 &&animals.size()>0)
         {
             cout << "There are " << animals.size() << " animals" << endl;
-            cout << "Which one?(just a numaber between 1 to " << animals.size() << ")" << endl;
+            cout << "Which one?(just a number between 1 to " << animals.size() << ")" << endl;
             for (int i = 0; i < Anames.size(); i++)
             {
                 cout << i + 1 << "." << Anames[i] << endl;
@@ -454,13 +453,13 @@ int main()
                 }
                 else
                 {
-                    cout << "just a numaber between 1 to " << animals.size() << endl;
+                    cout << "just a number between 1 to " << animals.size() << endl;
                     goto hell18;
                 }
             }
             else
             {
-                cout << "just a numaber between 1 to " << animals.size() << endl;
+                cout << "just a number between 1 to " << animals.size() << endl;
                 goto hell18;
             }
         }
@@ -472,7 +471,6 @@ int main()
             cout << "The number of animals or viruses is not enough \n" << endl;
         }
         
-    
     }
     return 0;
 }

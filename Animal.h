@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "cell.h"
+#include "Animal.h"
 
 using namespace std;
 class Virus;
